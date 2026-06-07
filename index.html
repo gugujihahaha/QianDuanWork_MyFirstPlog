@@ -2,549 +2,675 @@
 <html lang="zh-CN" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="尹文静的个人网站 — 软件工程学生，喜欢周杰伦、哈利·波特、手账和一切可爱美好的事物">
-  <title>尹文静 · 治愈小栈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的温暖小站 | 粉紫治愈系</title>
   <style>
-    /* ============================================================
-       全局变量 & 主题系统 (优化色彩层次与氛围)
-    ============================================================ */
+    /* ========== 全局重置与变量 ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
     :root {
-      /* 浅色主题 — 温润粉紫 */
-      --bg: #fef9fc;
-      --bg-secondary: #fdf5fa;
-      --bg-tertiary: #faeef7;
-      --surface: rgba(255, 248, 252, 0.72);
-      --surface-hover: rgba(255, 248, 252, 0.92);
-      --surface-solid: #ffffff;
-      --border: rgba(210, 180, 210, 0.35);
-      --border-strong: rgba(190, 165, 210, 0.55);
-
-      --text: #3d2c4a;
-      --text-secondary: #6e5a7e;
-      --text-muted: #a58bb5;
-
-      --pink: #e8aabe;
-      --pink-soft: #f2cad8;
-      --pink-pale: #ffeef4;
-      --pink-deep: #cd7f99;
-      --purple: #b69ad4;
-      --purple-soft: #cfb5ea;
-      --purple-pale: #f4ebfc;
-      --purple-deep: #8262aa;
-      --cream: #fffaf5;
-      --teal: #a6d4ca;
-
-      --gradient-hero: linear-gradient(125deg, #ddb6cb 0%, #bba6df 45%, #e2c2d4 100%);
-      --gradient-card: linear-gradient(135deg, #fef5fc, #fcf0fa);
-      --gradient-accent: linear-gradient(120deg, var(--purple), var(--pink));
-      --gradient-btn: linear-gradient(120deg, #cba9e5, #e8b6ca);
-
-      --shadow-xs: 0 2px 6px rgba(100, 70, 120, 0.04);
-      --shadow-sm: 0 6px 18px rgba(120, 90, 140, 0.08);
-      --shadow-md: 0 12px 30px rgba(120, 90, 140, 0.12);
-      --shadow-lg: 0 24px 48px rgba(120, 90, 140, 0.16);
-      --shadow-glow: 0 0 18px rgba(170, 130, 200, 0.25);
-
-      --radius-xs: 8px;
-      --radius-sm: 16px;
-      --radius: 24px;
-      --radius-lg: 32px;
-      --radius-xl: 40px;
-      --radius-full: 999px;
-
-      --transition: 0.28s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      --transition-spring: 0.4s cubic-bezier(0.34, 1.4, 0.64, 1);
+      /* 粉紫系主色调（温暖治愈） */
+      --primary: #d89ef0;
+      --primary-light: #f0d9f8;
+      --primary-dark: #b87ed8;
+      /* 浅色主题 */
+      --bg-main: #fff9fc;
+      --bg-card: #f5eff7;
+      --text-main: #5a4b60;
+      --text-secondary: #8a7895;
+      /* 通用样式 */
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(216, 158, 240, 0.1);
+      --shadow-hover: 0 8px 24px rgba(216, 158, 240, 0.2);
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
     }
 
     [data-theme="dark"] {
-      --bg: #1a1524;
-      --bg-secondary: #201b2c;
-      --bg-tertiary: #2a2238;
-      --surface: rgba(30, 24, 44, 0.78);
-      --surface-hover: rgba(40, 32, 56, 0.92);
-      --surface-solid: #261f32;
-      --border: rgba(110, 85, 135, 0.4);
-      --border-strong: rgba(145, 115, 170, 0.55);
-
-      --text: #ede4f8;
-      --text-secondary: #cbbce4;
-      --text-muted: #9b88b5;
-
-      --pink: #cb8ea4;
-      --pink-soft: #ac7a8c;
-      --pink-pale: #392c38;
-      --pink-deep: #e2a1b5;
-      --purple: #a683c6;
-      --purple-soft: #7e5fa0;
-      --purple-pale: #332a48;
-      --purple-deep: #c2a4e6;
-      --cream: #28222e;
-      --teal: #7fbbb0;
-
-      --gradient-hero: linear-gradient(125deg, #c394ae, #a884cd, #c3a1bd);
-      --gradient-card: linear-gradient(135deg, #2a233a, #241f34);
-      --gradient-accent: linear-gradient(120deg, #b695db, #e2afc4);
-      --gradient-btn: linear-gradient(120deg, #8d6bb0, #c58ca4);
-
-      --shadow-xs: 0 2px 6px rgba(0, 0, 0, 0.3);
-      --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.35);
-      --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.45);
-      --shadow-lg: 0 22px 48px rgba(0, 0, 0, 0.55);
-      --shadow-glow: 0 0 20px rgba(140, 100, 180, 0.3);
+      /* 深色主题（粉紫适配） */
+      --primary: #c88ee0;
+      --primary-light: #b87ed8;
+      --primary-dark: #a06bc0;
+      --bg-main: #2d2336;
+      --bg-card: #3d3048;
+      --text-main: #e8d9f0;
+      --text-secondary: #c8b8d0;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
     body {
-      font-family: 'Inter', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      transition: background var(--transition), color var(--transition);
-      overflow-x: hidden;
+      font-family: "Inter", "Microsoft YaHei", sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 0 var(--spacing-md);
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 100vh;
     }
 
-    ::selection { background: rgba(185, 140, 210, 0.35); color: var(--purple-deep); }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--purple-soft); border-radius: 6px; }
-
-    /* 容器 & 基础工具 */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
-    .section { margin: 100px 0; position: relative; }
-    .section-title {
-      font-size: 2.1rem;
-      font-weight: 650;
-      text-align: center;
-      margin-bottom: 48px;
-      background: var(--gradient-accent);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: -0.01em;
-    }
-    .section-desc { text-align: center; color: var(--text-muted); margin-top: -32px; margin-bottom: 40px; }
-
-    /* ========== 滚动进度条 ========== */
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--pink), var(--purple));
-      z-index: 200;
-      width: 0%;
-      border-radius: 0 3px 3px 0;
-      box-shadow: 0 0 8px var(--pink);
-    }
-
-    /* ========== 头部导航 (毛玻璃升级) ========== */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--surface);
-      backdrop-filter: blur(20px) saturate(1.5);
-      border-bottom: 1px solid var(--border);
-      transition: all var(--transition);
-    }
-    .site-header.scrolled { box-shadow: var(--shadow-sm); background: var(--surface-hover); }
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 70px;
-      gap: 24px;
-    }
-    .logo {
-      font-size: 1.6rem;
-      font-weight: 700;
-      background: var(--gradient-accent);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: transform var(--transition-spring);
-    }
-    .logo:hover { transform: scale(1.05); }
-    .nav-list { display: flex; gap: 8px; list-style: none; }
-    .nav-list a {
-      padding: 8px 20px;
-      border-radius: var(--radius-full);
-      font-weight: 550;
-      color: var(--text-secondary);
-      transition: all var(--transition);
-    }
-    .nav-list a:hover, .nav-list a.active {
-      background: var(--purple-pale);
-      color: var(--purple-deep);
-      box-shadow: var(--shadow-xs);
-    }
-    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 10px; border-radius: var(--radius-sm); }
-    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--purple-deep); margin: 5px 0; transition: var(--transition); }
-    .theme-toggle {
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-full);
-      width: 44px;
-      height: 44px;
-      cursor: pointer;
-      font-size: 1.3rem;
-      transition: all var(--transition-spring);
-    }
-    .theme-toggle:hover { transform: rotate(12deg) scale(1.05); background: var(--purple-pale); }
-
-    /* 按钮 & 卡片动效增强 */
+    /* ========== 通用组件 ========== */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 28px;
-      border-radius: var(--radius-full);
-      font-weight: 600;
-      transition: all var(--transition-spring);
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
       border: none;
-      cursor: pointer;
-    }
-    .btn-primary { background: var(--gradient-btn); color: white; box-shadow: 0 6px 14px rgba(135, 100, 170, 0.25); }
-    .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 15px 28px rgba(135, 100, 170, 0.35); }
-    .btn-hero-outline { background: transparent; border: 1.5px solid var(--purple-deep); color: var(--purple-deep); backdrop-filter: blur(4px); }
-    .btn-hero-outline:hover { background: var(--purple-pale); transform: translateY(-3px); }
-
-    /* Hero 优化 */
-    .hero {
-      min-height: 85vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg-img {
-      position: absolute;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=2070&auto=format&fit=crop') center/cover;
-      opacity: 0.45;
-      z-index: -2;
-    }
-    .hero-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.4;
-      animation: floatBlob 14s infinite alternate ease-in-out;
-    }
-    .hero-blob:nth-child(1) { width: 400px; height: 400px; background: var(--pink-soft); top: -10%; left: -5%; }
-    .hero-blob:nth-child(2) { width: 350px; height: 350px; background: var(--purple-soft); bottom: -15%; right: -5%; animation-duration: 18s; }
-    @keyframes floatBlob { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(40px, -30px) scale(1.1); } }
-    .hero-content { position: relative; z-index: 2; animation: fadeUp 0.8s ease; }
-    .hero-name { font-size: clamp(2.8rem, 8vw, 4.5rem); font-weight: 800; background: var(--gradient-hero); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
-    .hero-sub { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 16px; }
-    .hero-scroll { margin-top: 60px; animation: bounceHint 2s infinite; cursor: pointer; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes bounceHint { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(8px); } }
-
-    /* About / Interests 卡片升级 */
-    .about-grid {
-      display: flex;
-      gap: 60px;
-      background: var(--surface);
-      backdrop-filter: blur(12px);
-      border-radius: var(--radius-xl);
-      padding: 48px;
-      border: 1px solid var(--border);
-      transition: var(--transition);
-    }
-    .about-grid:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-    .interests-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-    }
-    .interest-card {
-      background: var(--surface);
-      backdrop-filter: blur(12px);
+      color: white;
+      padding: var(--spacing-sm) var(--spacing-md);
       border-radius: var(--radius);
-      padding: 32px 24px;
-      text-align: center;
-      border: 1px solid var(--border);
-      transition: all var(--transition-spring);
-    }
-    .interest-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--purple-soft); }
-
-    /* 音乐区域 + 唱片统一控制 */
-    .music-card {
-      background: var(--surface);
-      border-radius: var(--radius-xl);
-      padding: 44px;
-      display: flex;
-      gap: 48px;
-      flex-wrap: wrap;
-      backdrop-filter: blur(12px);
-    }
-    .vinyl {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #222, #0a0a0a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--shadow-md);
       cursor: pointer;
-      transition: transform 0.2s ease;
-      animation: spinRecord 6s linear infinite;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: var(--shadow);
     }
-    .vinyl.paused { animation-play-state: paused; }
-    .vinyl-disc { width: 70px; height: 70px; background: linear-gradient(135deg, var(--pink), var(--purple)); border-radius: 50%; }
-    @keyframes spinRecord { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .music-list li {
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border-radius: var(--radius);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .input {
+      width: 100%;
+      padding: var(--spacing-sm) var(--spacing-md);
+      border: 2px solid var(--primary-light);
+      border-radius: var(--radius);
+      background-color: transparent;
+      color: var(--text-main);
+      font-size: 1rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(216, 158, 240, 0.1);
+    }
+
+    /* ========== 布局模块 ========== */
+    header {
       display: flex;
       justify-content: space-between;
-      padding: 12px 16px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: background var(--transition);
+      align-items: center;
+      padding: var(--spacing-xl) 0;
+      margin-bottom: var(--spacing-xl);
     }
-    .music-list li.active, .music-list li:hover { background: var(--purple-pale); }
-    .floating-music-btn {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: var(--surface);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border-strong);
-      cursor: pointer;
-      z-index: 99;
-      transition: all var(--transition-spring);
-    }
-    .floating-music-btn.playing { animation: pulseGlow 1.8s infinite, spinRecord 3s linear infinite; box-shadow: var(--shadow-glow); }
-    @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 var(--purple); } 100% { box-shadow: 0 0 0 10px transparent; } }
 
-    /* 照片墙 & Lightbox */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 22px;
+    .logo {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--primary-dark);
     }
-    .gallery-item {
+
+    .theme-toggle {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary);
+    }
+
+    section {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: var(--spacing-sm);
+    }
+
+    footer {
+      text-align: center;
+      padding: var(--spacing-lg) 0;
+      color: var(--text-secondary);
+      margin-top: var(--spacing-xl);
+    }
+
+    /* ========== 关于我模块 ========== */
+    .about-content {
+      display: flex;
+      gap: var(--spacing-lg);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .about-avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary-light);
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-text p {
+      margin-bottom: var(--spacing-md);
+      font-size: 1.1rem;
+    }
+
+    /* ========== 照片墙模块 ========== */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+    }
+
+    .photo-card {
       border-radius: var(--radius);
       overflow: hidden;
       cursor: pointer;
-      transition: all var(--transition-spring);
     }
-    .gallery-item img { width: 100%; height: 240px; object-fit: cover; transition: transform 0.5s ease; }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .lightbox {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(12px);
-      display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; z-index: 300; transition: 0.25s;
-    }
-    .lightbox.open { opacity: 1; pointer-events: auto; }
 
-    /* 留言板 & 随手记优化 */
-    .guestbook-form, .journal-editor {
-      background: var(--surface);
-      backdrop-filter: blur(10px);
-      border-radius: var(--radius);
-      padding: 28px;
-      margin-bottom: 32px;
-      border: 1px solid var(--border);
+    .photo-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
     }
-    .guestbook-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
-    }
-    .guestbook-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 22px;
-      transition: var(--transition-spring);
-    }
-    .guestbook-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
 
-    /* 响应式 */
-    @media (max-width: 800px) {
-      .nav-toggle { display: flex; flex-direction: column; }
-      .nav-list { position: fixed; top: 70px; left: 0; right: 0; flex-direction: column; background: var(--surface-solid); backdrop-filter: blur(32px); transform: translateY(-120%); transition: 0.3s; padding: 20px; gap: 12px; border-bottom: 1px solid var(--border); }
-      .nav-list.open { transform: translateY(0); }
-      .about-grid { flex-direction: column; padding: 32px; }
-      .music-card { flex-direction: column; align-items: center; }
-      .section { margin: 70px 0; }
+    .photo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
     }
-    @media (max-width: 500px) { .container { padding: 0 18px; } }
+
+    /* ========== 音乐播放模块 ========== */
+    .music-player {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .music-list {
+      display: flex;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .music-item {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius);
+      background-color: var(--primary-light);
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .music-item.active {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .music-controls {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+
+    .music-progress {
+      flex: 1;
+      height: 8px;
+      background-color: var(--text-secondary);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: var(--primary);
+      border-radius: 4px;
+      width: 0%;
+    }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .volume-slider {
+      width: 80px;
+      accent-color: var(--primary);
+    }
+
+    /* ========== 随手记模块 ========== */
+    .note-form {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .note-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .note-item {
+      padding: var(--spacing-md);
+      border-left: 4px solid var(--primary);
+      background-color: var(--bg-card);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .note-delete {
+      color: var(--primary-dark);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .note-delete:hover {
+      color: var(--primary);
+    }
+
+    /* ========== 留言板模块 ========== */
+    .message-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .message-item {
+      padding: var(--spacing-md);
+      background-color: var(--bg-card);
+      border-radius: var(--radius);
+    }
+
+    .message-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .message-delete {
+      color: var(--primary-dark);
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <header class="site-header" id="header">
-    <div class="header-inner container">
-      <a href="#" class="logo">✨ WJ</a>
-      <nav class="site-nav">
-        <button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span><span></span><span></span></button>
-        <ul class="nav-list" id="navList">
-          <li><a href="#about">关于</a></li><li><a href="#interests">爱好</a></li><li><a href="#music">音乐</a></li>
-          <li><a href="#gallery">照片</a></li><li><a href="#journal">随手记</a></li><li><a href="#guestbook">留言板</a></li>
-        </ul>
-      </nav>
-      <button class="theme-toggle" id="themeToggle" aria-label="主题">🌙</button>
-    </div>
+  <!-- 头部导航 -->
+  <header>
+    <div class="logo">我的温暖小站</div>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero" id="hero">
-      <div class="hero-bg-img"></div><div class="hero-blob"></div><div class="hero-blob"></div>
-      <div class="hero-content container">
-        <h1 class="hero-name">尹文静</h1>
-        <p class="hero-sub">🎧 写代码也写诗 · 永远相信魔法</p>
-        <p class="hero-desc">周杰伦 · 哈利波特 · 手账 · 跳舞 · 胡思乱想</p>
-        <div class="hero-cta"><a href="#about" class="btn btn-primary">了解更多</a><a href="#music" class="btn btn-hero-outline">听首歌吧</a></div>
-        <div class="hero-scroll">⌵ 向下探索 ⌵</div>
+    <!-- 关于我模块 -->
+    <section class="module about">
+      <h2 class="section-title">关于我</h2>
+      <div class="card about-content">
+        <img src="https://picsum.photos/200/200?random=1" alt="个人头像" class="about-avatar">
+        <div class="about-text">
+          <p>你好呀～我是一个喜欢记录生活、分享美好瞬间的人✨</p>
+          <p>偏爱粉紫色的温柔，喜欢听舒缓的音乐，用文字和照片留住生活里的小确幸。</p>
+          <p>这个小站是我的小小天地，愿这里的一切能给你带来温暖和治愈～</p>
+        </div>
       </div>
     </section>
 
-    <!-- About / Interests 简约整合 -->
-    <section class="section" id="about"><div class="container"><h2 class="section-title">✦ 关于我 ✦</h2><div class="about-grid"><div><p>嗨，我是文静。软件工程大二学生，喜欢用代码创造，也喜欢用文字和手账记录生活。周杰伦的旋律贯穿整个青春，哈利·波特教会我勇敢。这里是我为自己搭建的治愈小站，欢迎你来～</p></div><div style="font-size:4rem;text-align:center;">🌸</div></div></div></section>
-    
-    <section class="section" id="interests"><div class="container"><h2 class="section-title">✨ 喜欢的事 ✨</h2><div class="interests-grid"><div class="interest-card"><span>🎵</span><h3>听歌循环</h3><p>周杰伦永远的神，每首都是时光机</p></div><div class="interest-card"><span>⚡</span><h3>哈利·波特</h3><p>狮院荣誉校友，Always.</p></div><div class="interest-card"><span>📒</span><h3>手账拼贴</h3><p>把温柔的日子具象化</p></div><div class="interest-card"><span>💃</span><h3>自由跳舞</h3><p>快乐律动，没有规则</p></div></div></div></section>
+    <!-- 照片墙模块 -->
+    <section class="module photo-wall">
+      <h2 class="section-title">照片墙</h2>
+      <div class="photo-grid">
+        <div class="photo-card"><img src="https://picsum.photos/400/400?random=2" alt="生活瞬间" loading="lazy"></div>
+        <div class="photo-card"><img src="https://picsum.photos/400/400?random=3" alt="生活瞬间" loading="lazy"></div>
+        <div class="photo-card"><img src="https://picsum.photos/400/400?random=4" alt="生活瞬间" loading="lazy"></div>
+        <div class="photo-card"><img src="https://picsum.photos/400/400?random=5" alt="生活瞬间" loading="lazy"></div>
+        <div class="photo-card"><img src="https://picsum.photos/400/400?random=6" alt="生活瞬间" loading="lazy"></div>
+        <div class="photo-card"><img src="https://picsum.photos/400/400?random=7" alt="生活瞬间" loading="lazy"></div>
+      </div>
+    </section>
 
-    <!-- 音乐区块 (修复歌曲切换+全局音乐统一) -->
-    <section class="section" id="music"><div class="container"><h2 class="section-title">🎧 正在播放</h2><div class="music-card"><div class="vinyl" id="globalVinyl"><div class="vinyl-disc"></div></div><div><ul class="music-list" id="musicList"><li data-id="186016" class="active"><span>晴天</span><span>周杰伦</span><span>▶</span></li><li data-id="186001"><span>七里香</span><span>周杰伦</span><span>▶</span></li><li data-id="185904"><span>夜曲</span><span>周杰伦</span><span>▶</span></li><li data-id="185633"><span>稻香</span><span>周杰伦</span><span>▶</span></li></ul><iframe id="musicPlayerFrame" src="//music.163.com/outchain/player?type=2&id=186016&auto=0&height=86" width="100%" height="86" frameborder="0"></iframe><p class="music-note">“故事的小黄花，从出生那年就飘着”</p></div></div></div></section>
+    <!-- 音乐播放模块 -->
+    <section class="module music">
+      <h2 class="section-title">治愈音乐</h2>
+      <div class="card music-player">
+        <div class="music-list" id="musicList">
+          <div class="music-item" data-id="1">温柔的风</div>
+          <div class="music-item" data-id="2">星空下的旋律</div>
+          <div class="music-item" data-id="3">粉紫梦境</div>
+        </div>
+        <div class="music-controls">
+          <button class="btn" id="playBtn">播放</button>
+          <button class="btn" id="pauseBtn">暂停</button>
+          <div class="music-progress" id="progressBar">
+            <div class="progress-bar" id="currentProgress"></div>
+          </div>
+          <div class="volume-control">
+            <span>🔊</span>
+            <input type="range" min="0" max="1" step="0.1" value="0.7" class="volume-slider" id="volumeSlider">
+          </div>
+        </div>
+        <audio id="audioPlayer" src="" preload="metadata"></audio>
+      </div>
+    </section>
 
-    <!-- 照片墙精简 -->
-    <section class="section" id="gallery"><div class="container"><h2 class="section-title">📷 生活碎片</h2><div class="gallery-grid" id="galleryGrid"><figure class="gallery-item"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600" alt="日落" data-full="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200"></figure><figure class="gallery-item"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600" alt="coding" data-full="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200"></figure><figure class="gallery-item"><img src="https://images.unsplash.com/photo-1618666012174-83b441c0bc76?w=600" alt="手账" data-full="https://images.unsplash.com/photo-1618666012174-83b441c0bc76?w=1200"></figure><figure class="gallery-item"><img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=600" alt="黑胶" data-full="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=1200"></figure></div></div></section>
+    <!-- 随手记模块 -->
+    <section class="module notes">
+      <h2 class="section-title">随手记</h2>
+      <div class="card">
+        <div class="note-form">
+          <input type="text" class="input" id="noteInput" placeholder="写下你的小心情、小感悟～">
+          <button class="btn" id="addNoteBtn">添加笔记</button>
+        </div>
+        <div class="note-list" id="noteList"></div>
+      </div>
+    </section>
 
-    <!-- 随手记 -->
-    <section class="section" id="journal"><div class="container"><h2 class="section-title">📝 随手记</h2><div class="journal-editor"><textarea id="journalInput" rows="3" placeholder="写下一闪而过的念头..." style="width:100%; background:var(--bg); border-radius:var(--radius-sm); padding:14px; border:1px solid var(--border);"></textarea><div style="display:flex; justify-content:space-between; margin-top:12px;"><span id="journalHint">✍️ 记录温柔片刻</span><button id="journalSave" class="btn btn-primary">保存</button></div></div><div id="journalList" class="journal-list"></div></div></section>
-
-    <!-- 留言板 -->
-    <section class="section" id="guestbook"><div class="container"><h2 class="section-title">📖 访客留言板</h2><div class="guestbook-form"><input type="text" id="guestName" placeholder="你的名字" style="width:100%; padding:12px; border-radius:var(--radius-full); background:var(--bg); border:1px solid var(--border); margin-bottom:12px;"><textarea id="guestMessage" rows="3" placeholder="留下你想说的话..." style="width:100%; border-radius:var(--radius-sm); background:var(--bg); border:1px solid var(--border); padding:12px;"></textarea><div style="display:flex; justify-content:space-between; margin-top:12px;"><span id="charCounter">0/200</span><button id="submitGuestbook" class="btn btn-primary">💬 留下印记</button></div></div><div id="guestbookGrid" class="guestbook-grid"></div></div></section>
-
-    <footer class="site-footer"><div class="container" style="text-align:center; padding:32px 0;"><p>✨ 尹文静 · 永远保持好奇与温柔 ✨</p><p id="footerQuote">"After all this time? Always." — Snape</p></div></footer>
+    <!-- 留言板模块 -->
+    <section class="module message-board">
+      <h2 class="section-title">留言板</h2>
+      <div class="card">
+        <div class="message-form">
+          <input type="text" class="input" id="messageName" placeholder="你的昵称">
+          <textarea class="input" id="messageContent" rows="3" placeholder="留下你的悄悄话吧～"></textarea>
+          <button class="btn" id="addMessageBtn">发送留言</button>
+        </div>
+        <div class="message-list" id="messageList"></div>
+      </div>
+    </section>
   </main>
-  <button id="globalMusicBtn" class="floating-music-btn" aria-label="背景音乐">🎵</button>
-  <audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" crossorigin="anonymous"></audio>
-  <div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightboxClose">✕</button><img id="lightboxImg" alt=""></div>
+
+  <footer>
+    <p>© 2025 我的温暖小站 | 粉紫治愈系 ✨</p>
+  </footer>
 
   <script>
-    (function(){
-      // ==== 主题 + 进度条 + 导航统一 ====
-      const html = document.documentElement, themeBtn = document.getElementById('themeToggle');
-      const saved = localStorage.getItem('wenjing_theme');
-      if(saved === 'dark') html.setAttribute('data-theme','dark');
-      themeBtn?.addEventListener('click',()=>{ const cur = html.getAttribute('data-theme'); const next = cur === 'dark' ? 'light' : 'dark'; html.setAttribute('data-theme',next); localStorage.setItem('wenjing_theme',next); themeBtn.textContent = next === 'dark' ? '☀️' : '🌙'; });
-      // 进度条
-      const prog = document.createElement('div'); prog.className = 'scroll-progress'; document.body.prepend(prog);
-      window.addEventListener('scroll',()=>{ const winScroll = window.scrollY, height = document.documentElement.scrollHeight - window.innerHeight; const width = (winScroll/height)*100; prog.style.width = width+'%'; });
-      // mobile nav
-      const navToggle = document.getElementById('navToggle'), navList = document.getElementById('navList');
-      navToggle?.addEventListener('click',()=>navList.classList.toggle('open'));
-      
-      // ==== 音乐统一控制 (背景音乐 + 黑胶联动) ====
-      const bgMusic = document.getElementById('bgMusic');
-      const globalBtn = document.getElementById('globalMusicBtn');
-      const vinylDisk = document.getElementById('globalVinyl');
-      let isMusicPlaying = false;
-      function updateMusicUI(playing){
-        isMusicPlaying = playing;
-        if(playing){
-          globalBtn?.classList.add('playing');
-          vinylDisk?.classList.remove('paused');
-          globalBtn.setAttribute('aria-label','暂停音乐');
-        } else {
-          globalBtn?.classList.remove('playing');
-          vinylDisk?.classList.add('paused');
-          globalBtn.setAttribute('aria-label','播放音乐');
-        }
+    // ========== 工具函数封装 ==========
+    // localStorage操作
+    const storage = {
+      get: (key) => {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : [];
+      },
+      set: (key, data) => {
+        localStorage.setItem(key, JSON.stringify(data));
+      },
+      remove: (key, index) => {
+        const data = storage.get(key);
+        data.splice(index, 1);
+        storage.set(key, data);
+        return data;
       }
-      function toggleGlobalMusic(){
-        if(bgMusic.paused){
-          bgMusic.play().then(()=>updateMusicUI(true)).catch(e=>console.log("播放失败:",e));
-        } else {
-          bgMusic.pause();
-          updateMusicUI(false);
-        }
+    };
+
+    // 防抖函数
+    const debounce = (fn, delay = 500) => {
+      let timer = null;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+      };
+    };
+
+    // ========== 主题切换 ==========
+    const themeToggle = document.getElementById('themeToggle');
+    const initTheme = () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      themeToggle.innerText = savedTheme === 'light' ? '🌙' : '☀️';
+    };
+
+    const toggleTheme = () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.innerText = newTheme === 'light' ? '🌙' : '☀️';
+    };
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // ========== 音乐播放器 ==========
+    class MusicPlayer {
+      constructor() {
+        this.audio = document.getElementById('audioPlayer');
+        this.musicList = document.getElementById('musicList');
+        this.playBtn = document.getElementById('playBtn');
+        this.pauseBtn = document.getElementById('pauseBtn');
+        this.progressBar = document.getElementById('progressBar');
+        this.currentProgress = document.getElementById('currentProgress');
+        this.volumeSlider = document.getElementById('volumeSlider');
+        this.musics = [
+          { id: 1, src: 'https://music.163.com/song/media/outer/url?id=1879461642.mp3' }, // 示例音乐链接（可替换）
+          { id: 2, src: 'https://music.163.com/song/media/outer/url?id=1880327100.mp3' },
+          { id: 3, src: 'https://music.163.com/song/media/outer/url?id=1879461643.mp3' }
+        ];
+        this.currentMusicId = storage.get('currentMusicId')[0] || 1;
+        this.currentTime = storage.get('currentMusicTime')[0] || 0;
+        this.volume = storage.get('musicVolume')[0] || 0.7;
+        this.init();
       }
-      globalBtn?.addEventListener('click', toggleGlobalMusic);
-      vinylDisk?.addEventListener('click', (e)=>{ e.stopPropagation(); toggleGlobalMusic(); });
-      // 自动播放策略: 用户首次点击页面任意位置激活音乐
-      const activateAudio = ()=>{ if(bgMusic.paused) bgMusic.play().then(()=>updateMusicUI(true)).catch(()=>{}); document.removeEventListener('click',activateAudio); document.removeEventListener('touchstart',activateAudio); };
-      document.addEventListener('click',activateAudio);
-      document.addEventListener('touchstart',activateAudio);
-      window.addEventListener('load',()=>{ bgMusic.play().then(()=>updateMusicUI(true)).catch(()=>updateMusicUI(false)); });
-      
-      // ==== 音乐列表切换网易云iframe (修复原缺失功能) ====
-      const musicItems = document.querySelectorAll('#musicList li');
-      const playerFrame = document.getElementById('musicPlayerFrame');
-      function switchSong(songId, activeEl){
-        if(!playerFrame) return;
-        playerFrame.src = `//music.163.com/outchain/player?type=2&id=${songId}&auto=1&height=86`;
-        musicItems.forEach(li=>li.classList.remove('active'));
-        activeEl.classList.add('active');
+
+      init() {
+        // 初始化音量
+        this.audio.volume = this.volume;
+        this.volumeSlider.value = this.volume;
+        // 初始化当前播放音乐
+        this.setMusic(this.currentMusicId);
+        // 恢复播放进度
+        this.audio.currentTime = this.currentTime;
+        // 绑定事件
+        this.bindEvents();
       }
-      musicItems.forEach(li=>{
-        li.addEventListener('click',(e)=>{
-          const songId = li.getAttribute('data-id');
-          if(songId) switchSong(songId, li);
+
+      bindEvents() {
+        // 选择音乐
+        this.musicList.addEventListener('click', (e) => {
+          if (e.target.classList.contains('music-item')) {
+            const id = Number(e.target.dataset.id);
+            this.setMusic(id);
+            this.play();
+          }
         });
-      });
-      
-      // ==== 照片墙灯箱 ====
-      const galleryImgs = document.querySelectorAll('.gallery-item img');
-      const lightbox = document.getElementById('lightbox'), lightboxImg = document.getElementById('lightboxImg'), closeLight = document.getElementById('lightboxClose');
-      galleryImgs.forEach(img=>{
-        img.addEventListener('click',()=>{ lightboxImg.src = img.getAttribute('data-full')||img.src; lightbox.classList.add('open'); });
-      });
-      closeLight?.addEventListener('click',()=>lightbox.classList.remove('open'));
-      lightbox?.addEventListener('click',e=>{ if(e.target===lightbox) lightbox.classList.remove('open'); });
-      
-      // ==== 随手记 localStorage (加删除确认) ====
-      const JOURNAL_KEY = 'wenjing_journal';
-      let journalEntries = [];
-      function loadJournal(){ try{ const raw = localStorage.getItem(JOURNAL_KEY); journalEntries = raw ? JSON.parse(raw) : []; }catch(e){ journalEntries=[]; } renderJournal(); }
-      function saveJournal(){ localStorage.setItem(JOURNAL_KEY, JSON.stringify(journalEntries)); renderJournal(); }
-      function addJournal(text){ journalEntries.unshift({ id: Date.now(), text: text.trim(), time: new Date().toISOString() }); saveJournal(); }
-      function deleteJournal(id){ if(confirm('删除这条思绪吗？')){ journalEntries = journalEntries.filter(e=>e.id !== id); saveJournal(); showToast('已删除'); } }
-      function renderJournal(){
-        const container = document.getElementById('journalList');
-        if(!container) return;
-        if(journalEntries.length===0){ container.innerHTML='<div style="text-align:center;padding:32px;">✨ 暂无记录，写点什么吧 ✨</div>'; return; }
-        container.innerHTML = journalEntries.map(e=>`<div class="guestbook-card" style="display:flex;justify-content:space-between;"><div><div>${escapeHtml(e.text)}</div><div style="font-size:12px;color:var(--text-muted);">${new Date(e.time).toLocaleString()}</div></div><button class="delete-journal" data-id="${e.id}" style="background:none;border:none;cursor:pointer;">🗑️</button></div>`).join('');
-        document.querySelectorAll('.delete-journal').forEach(btn=>{ btn.addEventListener('click',()=>deleteJournal(Number(btn.dataset.id))); });
+
+        // 播放/暂停
+        this.playBtn.addEventListener('click', () => this.play());
+        this.pauseBtn.addEventListener('click', () => this.pause());
+
+        // 进度条更新
+        this.audio.addEventListener('timeupdate', () => this.updateProgress());
+
+        // 进度条点击跳转
+        this.progressBar.addEventListener('click', (e) => {
+          const progressWidth = this.progressBar.offsetWidth;
+          const clickX = e.offsetX;
+          const duration = this.audio.duration;
+          this.audio.currentTime = (clickX / progressWidth) * duration;
+        });
+
+        // 音量控制
+        this.volumeSlider.addEventListener('input', (e) => {
+          this.volume = e.target.value;
+          this.audio.volume = this.volume;
+          storage.set('musicVolume', [this.volume]);
+        });
+
+        // 保存播放进度
+        this.audio.addEventListener('pause', () => {
+          storage.set('currentMusicTime', [this.audio.currentTime]);
+        });
+
+        // 音乐结束自动切歌
+        this.audio.addEventListener('ended', () => {
+          let nextId = this.currentMusicId + 1;
+          if (nextId > this.musics.length) nextId = 1;
+          this.setMusic(nextId);
+          this.play();
+        });
       }
-      function escapeHtml(str){ return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-      document.getElementById('journalSave')?.addEventListener('click',()=>{ const val = document.getElementById('journalInput').value.trim(); if(val){ addJournal(val); document.getElementById('journalInput').value=''; showToast('已珍藏 ✨'); } else showToast('写一句话吧'); });
-      loadJournal();
-      
-      // ==== 留言板 localStorage (示范留言 + 删除确认) =====
-      const GUEST_KEY = 'wenjing_guest';
-      let messages = [];
-      function loadMessages(){ try{ const raw = localStorage.getItem(GUEST_KEY); messages = raw ? JSON.parse(raw) : []; if(messages.length===0){ messages = [{ id: Date.now()+1, name: "魔法师小王", content: "好治愈的小站，喜欢周杰伦！", avatar:"🌸", timestamp: Date.now()-86400000 },{ id: Date.now()+2, name: "赫奇帕奇学姐", content: "手账同好！一起热爱生活吧", avatar:"📖", timestamp: Date.now()-172800000 }]; saveMessages(); } }catch(e){ messages=[]; } renderMessages(); }
-      function saveMessages(){ localStorage.setItem(GUEST_KEY, JSON.stringify(messages)); renderMessages(); }
-      function addMessage(name,content){ if(!name.trim()||!content.trim()){ showToast('名字和留言都不能为空哦'); return false; } messages.unshift({ id: Date.now(), name: name.trim().slice(0,20), content: content.trim().slice(0,200), avatar: ['🌸','✨','🌟','🍀','🐱'][Math.floor(Math.random()*5)], timestamp: Date.now() }); saveMessages(); showToast('留言成功 ✨'); return true; }
-      function deleteMessage(id){ if(confirm('删除这条留言吗？')){ messages = messages.filter(m=>m.id !== id); saveMessages(); showToast('已删除'); } }
-      function renderMessages(){
-        const grid = document.getElementById('guestbookGrid'); if(!grid) return;
-        if(messages.length===0){ grid.innerHTML='<div class="guestbook-card">🍃 还没有留言，做第一个访客吧～</div>'; document.getElementById('guestbookCount') && (document.getElementById('guestbookCount').innerText='0'); return; }
-        grid.innerHTML = messages.map(m=>`<div class="guestbook-card"><div style="display:flex; gap:12px; align-items:center;"><span style="font-size:2rem;">${m.avatar}</span><div><strong>${escapeHtml(m.name)}</strong><div style="font-size:0.7rem;color:var(--text-muted);">${new Date(m.timestamp).toLocaleString()}</div></div></div><div>${escapeHtml(m.content)}</div><div style="text-align:right;"><button class="del-guest" data-id="${m.id}" style="background:none;border:none;cursor:pointer;">🗑️ 删除</button></div></div>`).join('');
-        document.querySelectorAll('.del-guest').forEach(btn=>{ btn.addEventListener('click',()=>deleteMessage(Number(btn.dataset.id))); });
-        const countSpan = document.getElementById('guestbookCount'); if(countSpan) countSpan.innerText = messages.length;
+
+      setMusic(id) {
+        // 移除之前的active状态
+        document.querySelectorAll('.music-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        // 设置新音乐
+        const music = this.musics.find(m => m.id === id);
+        if (music) {
+          this.audio.src = music.src;
+          this.currentMusicId = id;
+          storage.set('currentMusicId', [id]);
+          // 添加active状态
+          document.querySelector(`.music-item[data-id="${id}"]`).classList.add('active');
+        }
       }
-      document.getElementById('submitGuestbook')?.addEventListener('click',()=>{ const name = document.getElementById('guestName').value; const msg = document.getElementById('guestMessage').value; if(addMessage(name,msg)){ document.getElementById('guestName').value=''; document.getElementById('guestMessage').value=''; updateCharCount(); } });
-      function updateCharCount(){ const len = document.getElementById('guestMessage')?.value.length||0; const counter = document.getElementById('charCounter'); if(counter) counter.innerText=`${len}/200`; if(len>=200) counter.style.color='var(--pink-deep)'; else counter.style.color='var(--text-muted)'; }
-      document.getElementById('guestMessage')?.addEventListener('input',function(){ if(this.value.length>200) this.value=this.value.slice(0,200); updateCharCount(); });
-      loadMessages();
-      function showToast(msg){ let t = document.querySelector('.toast'); if(t) t.remove(); t = document.createElement('div'); t.className='toast'; t.innerText=msg; t.style.position='fixed'; t.style.bottom='20px'; t.style.left='50%'; t.style.transform='translateX(-50%)'; t.style.background='var(--purple-deep)'; t.style.color='white'; t.style.padding='12px 24px'; t.style.borderRadius='40px'; t.style.zIndex='1000'; document.body.appendChild(t); setTimeout(()=>t.remove(),2000); }
-      window.showToast = showToast;
-      
-      // 滚动高亮导航
-      const sections = document.querySelectorAll('section[id]');
-      window.addEventListener('scroll',()=>{ let current = ''; const scrollPos = window.scrollY+120; sections.forEach(sec=>{ if(sec.offsetTop <= scrollPos && sec.offsetTop+sec.offsetHeight > scrollPos) current = sec.getAttribute('id'); }); document.querySelectorAll('.nav-list a').forEach(a=>{ a.classList.toggle('active', a.getAttribute('href') === '#'+current); }); });
-    })();
+
+      play() {
+        this.audio.play();
+        this.playBtn.innerText = '播放中';
+      }
+
+      pause() {
+        this.audio.pause();
+        this.playBtn.innerText = '播放';
+      }
+
+      updateProgress() {
+        const progress = (this.audio.currentTime / this.audio.duration) * 100;
+        this.currentProgress.style.width = `${progress}%`;
+      }
+    }
+
+    // ========== 随手记功能 ==========
+    const initNotes = () => {
+      const noteInput = document.getElementById('noteInput');
+      const addNoteBtn = document.getElementById('addNoteBtn');
+      const noteList = document.getElementById('noteList');
+      const notes = storage.get('notes');
+
+      // 渲染笔记
+      const renderNotes = () => {
+        noteList.innerHTML = '';
+        const notes = storage.get('notes');
+        notes.forEach((note, index) => {
+          const noteItem = document.createElement('div');
+          noteItem.className = 'note-item';
+          noteItem.innerHTML = `
+            <span>${note}</span>
+            <span class="note-delete" data-index="${index}">🗑️</span>
+          `;
+          noteList.appendChild(noteItem);
+        });
+      };
+
+      // 添加笔记
+      const addNote = debounce(() => {
+        const content = noteInput.value.trim();
+        if (!content) {
+          alert('笔记内容不能为空哦～');
+          return;
+        }
+        const notes = storage.get('notes');
+        notes.push(content);
+        storage.set('notes', notes);
+        noteInput.value = '';
+        renderNotes();
+      });
+
+      // 删除笔记
+      noteList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('note-delete')) {
+          const index = Number(e.target.dataset.index);
+          storage.remove('notes', index);
+          renderNotes();
+        }
+      });
+
+      addNoteBtn.addEventListener('click', addNote);
+      renderNotes();
+    };
+
+    // ========== 留言板功能 ==========
+    const initMessages = () => {
+      const messageName = document.getElementById('messageName');
+      const messageContent = document.getElementById('messageContent');
+      const addMessageBtn = document.getElementById('addMessageBtn');
+      const messageList = document.getElementById('messageList');
+      const messages = storage.get('messages');
+
+      // 渲染留言
+      const renderMessages = () => {
+        messageList.innerHTML = '';
+        const messages = storage.get('messages');
+        messages.forEach((msg, index) => {
+          const messageItem = document.createElement('div');
+          messageItem.className = 'message-item';
+          messageItem.innerHTML = `
+            <div class="message-meta">
+              <span>${msg.name}</span>
+              <span>${msg.time}</span>
+              <span class="message-delete" data-index="${index}">🗑️</span>
+            </div>
+            <p>${msg.content}</p>
+          `;
+          messageList.appendChild(messageItem);
+        });
+      };
+
+      // 添加留言
+      const addMessage = debounce(() => {
+        const name = messageName.value.trim();
+        const content = messageContent.value.trim();
+        if (!name || !content) {
+          alert('昵称和留言内容都不能为空哦～');
+          return;
+        }
+        const now = new Date();
+        const time = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+        const messages = storage.get('messages');
+        messages.push({ name, content, time });
+        storage.set('messages', messages);
+        messageName.value = '';
+        messageContent.value = '';
+        renderMessages();
+      });
+
+      // 删除留言
+      messageList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('message-delete')) {
+          const index = Number(e.target.dataset.index);
+          storage.remove('messages', index);
+          renderMessages();
+        }
+      });
+
+      addMessageBtn.addEventListener('click', addMessage);
+      renderMessages();
+    };
+
+    // ========== 页面初始化 ==========
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme(); // 初始化主题
+      new MusicPlayer(); // 初始化音乐播放器
+      initNotes(); // 初始化随手记
+      initMessages(); // 初始化留言板
+    });
   </script>
 </body>
 </html>
