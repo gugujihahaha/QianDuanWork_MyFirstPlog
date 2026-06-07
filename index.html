@@ -3,674 +3,337 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的温暖小站 | 粉紫治愈系</title>
-  <style>
-    /* ========== 全局重置与变量 ========== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      transition: all 0.3s ease;
-    }
-
-    :root {
-      /* 粉紫系主色调（温暖治愈） */
-      --primary: #d89ef0;
-      --primary-light: #f0d9f8;
-      --primary-dark: #b87ed8;
-      /* 浅色主题 */
-      --bg-main: #fff9fc;
-      --bg-card: #f5eff7;
-      --text-main: #5a4b60;
-      --text-secondary: #8a7895;
-      /* 通用样式 */
-      --radius: 12px;
-      --shadow: 0 4px 12px rgba(216, 158, 240, 0.1);
-      --shadow-hover: 0 8px 24px rgba(216, 158, 240, 0.2);
-      --spacing-sm: 8px;
-      --spacing-md: 16px;
-      --spacing-lg: 24px;
-      --spacing-xl: 32px;
-    }
-
-    [data-theme="dark"] {
-      /* 深色主题（粉紫适配） */
-      --primary: #c88ee0;
-      --primary-light: #b87ed8;
-      --primary-dark: #a06bc0;
-      --bg-main: #2d2336;
-      --bg-card: #3d3048;
-      --text-main: #e8d9f0;
-      --text-secondary: #c8b8d0;
-    }
-
-    body {
-      font-family: "Inter", "Microsoft YaHei", sans-serif;
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      line-height: 1.6;
-      padding: 0 var(--spacing-md);
-      max-width: 1200px;
-      margin: 0 auto;
-      min-height: 100vh;
-    }
-
-    /* ========== 通用组件 ========== */
-    .btn {
-      background: linear-gradient(135deg, var(--primary-light), var(--primary));
-      border: none;
-      color: white;
-      padding: var(--spacing-sm) var(--spacing-md);
-      border-radius: var(--radius);
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 500;
-      box-shadow: var(--shadow);
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .btn:active {
-      transform: scale(0.98);
-    }
-
-    .card {
-      background-color: var(--bg-card);
-      border-radius: var(--radius);
-      padding: var(--spacing-lg);
-      box-shadow: var(--shadow);
-      margin-bottom: var(--spacing-lg);
-    }
-
-    .input {
-      width: 100%;
-      padding: var(--spacing-sm) var(--spacing-md);
-      border: 2px solid var(--primary-light);
-      border-radius: var(--radius);
-      background-color: transparent;
-      color: var(--text-main);
-      font-size: 1rem;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(216, 158, 240, 0.1);
-    }
-
-    /* ========== 布局模块 ========== */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: var(--spacing-xl) 0;
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .logo {
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--primary-dark);
-    }
-
-    .theme-toggle {
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--primary);
-    }
-
-    section {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .section-title {
-      font-size: 1.8rem;
-      color: var(--primary-dark);
-      margin-bottom: var(--spacing-lg);
-      border-bottom: 2px solid var(--primary-light);
-      padding-bottom: var(--spacing-sm);
-    }
-
-    footer {
-      text-align: center;
-      padding: var(--spacing-lg) 0;
-      color: var(--text-secondary);
-      margin-top: var(--spacing-xl);
-    }
-
-    /* ========== 关于我模块 ========== */
-    .about-content {
-      display: flex;
-      gap: var(--spacing-lg);
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .about-avatar {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--primary-light);
-    }
-
-    .about-text {
-      flex: 1;
-      min-width: 300px;
-    }
-
-    .about-text p {
-      margin-bottom: var(--spacing-md);
-      font-size: 1.1rem;
-    }
-
-    /* ========== 照片墙模块 ========== */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: var(--spacing-md);
-    }
-
-    .photo-card {
-      border-radius: var(--radius);
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .photo-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .photo-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* ========== 音乐播放模块 ========== */
-    .music-player {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-md);
-    }
-
-    .music-list {
-      display: flex;
-      gap: var(--spacing-sm);
-      flex-wrap: wrap;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .music-item {
-      padding: var(--spacing-sm) var(--spacing-md);
-      border-radius: var(--radius);
-      background-color: var(--primary-light);
-      color: var(--text-main);
-      cursor: pointer;
-    }
-
-    .music-item.active {
-      background-color: var(--primary);
-      color: white;
-    }
-
-    .music-controls {
-      display: flex;
-      gap: var(--spacing-md);
-      align-items: center;
-    }
-
-    .music-progress {
-      flex: 1;
-      height: 8px;
-      background-color: var(--text-secondary);
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .progress-bar {
-      height: 100%;
-      background-color: var(--primary);
-      border-radius: 4px;
-      width: 0%;
-    }
-
-    .volume-control {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-    }
-
-    .volume-slider {
-      width: 80px;
-      accent-color: var(--primary);
-    }
-
-    /* ========== 随手记模块 ========== */
-    .note-form {
-      margin-bottom: var(--spacing-lg);
-    }
-
-    .note-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-md);
-    }
-
-    .note-item {
-      padding: var(--spacing-md);
-      border-left: 4px solid var(--primary);
-      background-color: var(--bg-card);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .note-delete {
-      color: var(--primary-dark);
-      cursor: pointer;
-      font-size: 1.2rem;
-    }
-
-    .note-delete:hover {
-      color: var(--primary);
-    }
-
-    /* ========== 留言板模块 ========== */
-    .message-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-md);
-    }
-
-    .message-item {
-      padding: var(--spacing-md);
-      background-color: var(--bg-card);
-      border-radius: var(--radius);
-    }
-
-    .message-meta {
-      display: flex;
-      justify-content: space-between;
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .message-delete {
-      color: var(--primary-dark);
-      cursor: pointer;
-    }
-  </style>
+  <meta name="description" content="尹文静的个人网站 — 软件工程学生，喜欢周杰伦、哈利·波特、手账和一切可爱美好的事物">
+  <title>尹文静 · 个人小站</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- 头部导航 -->
-  <header>
-    <div class="logo">我的温暖小站</div>
-    <button class="theme-toggle" id="themeToggle">🌙</button>
+  <a href="#main-content" class="skip-link">跳到主要内容</a>
+
+  <header class="site-header" id="header">
+    <div class="header-inner container">
+      <a href="#hero" class="logo" aria-label="回到顶部">WJ</a>
+      <nav class="site-nav" aria-label="主导航">
+        <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-list" id="navList">
+          <li><a href="#about">关于</a></li>
+          <li><a href="#interests">爱好</a></li>
+          <li><a href="#music">音乐</a></li>
+          <li><a href="#gallery">照片</a></li>
+          <li><a href="#journal">随手记</a></li>
+          <li><a href="#guestbook">留言板</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式" title="切换深色 / 浅色模式">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <!-- 关于我模块 -->
-    <section class="module about">
-      <h2 class="section-title">关于我</h2>
-      <div class="card about-content">
-        <img src="https://picsum.photos/200/200?random=1" alt="个人头像" class="about-avatar">
-        <div class="about-text">
-          <p>你好呀～我是一个喜欢记录生活、分享美好瞬间的人✨</p>
-          <p>偏爱粉紫色的温柔，喜欢听舒缓的音乐，用文字和照片留住生活里的小确幸。</p>
-          <p>这个小站是我的小小天地，愿这里的一切能给你带来温暖和治愈～</p>
-        </div>
+  <main id="main-content">
+    <section class="hero" id="hero">
+      <div class="hero-bg-img" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-blob"></div>
+        <div class="hero-blob"></div>
+        <div class="hero-blob"></div>
       </div>
-    </section>
-
-    <!-- 照片墙模块 -->
-    <section class="module photo-wall">
-      <h2 class="section-title">照片墙</h2>
-      <div class="photo-grid">
-        <div class="photo-card"><img src="https://picsum.photos/400/400?random=2" alt="生活瞬间" loading="lazy"></div>
-        <div class="photo-card"><img src="https://picsum.photos/400/400?random=3" alt="生活瞬间" loading="lazy"></div>
-        <div class="photo-card"><img src="https://picsum.photos/400/400?random=4" alt="生活瞬间" loading="lazy"></div>
-        <div class="photo-card"><img src="https://picsum.photos/400/400?random=5" alt="生活瞬间" loading="lazy"></div>
-        <div class="photo-card"><img src="https://picsum.photos/400/400?random=6" alt="生活瞬间" loading="lazy"></div>
-        <div class="photo-card"><img src="https://picsum.photos/400/400?random=7" alt="生活瞬间" loading="lazy"></div>
-      </div>
-    </section>
-
-    <!-- 音乐播放模块 -->
-    <section class="module music">
-      <h2 class="section-title">治愈音乐</h2>
-      <div class="card music-player">
-        <div class="music-list" id="musicList">
-          <div class="music-item" data-id="1">温柔的风</div>
-          <div class="music-item" data-id="2">星空下的旋律</div>
-          <div class="music-item" data-id="3">粉紫梦境</div>
+      <div class="hero-content container">
+        <div class="hero-badge reveal">✦ 个人小站 ✦</div>
+        <p class="hero-greeting reveal">你好呀，我是</p>
+        <h1 class="hero-name reveal">尹文静</h1>
+        <p class="hero-sub reveal">
+          <span class="hero-typing" id="heroTyping"></span>
+        </p>
+        <p class="hero-desc reveal">听周杰伦 &nbsp;·&nbsp; 读哈利·波特 &nbsp;·&nbsp; 写手账 &nbsp;·&nbsp; 胡思乱想</p>
+        <div class="hero-cta reveal">
+          <a href="#about" class="btn btn-primary">了解更多</a>
+          <a href="#music" class="btn btn-outline">听听音乐</a>
         </div>
-        <div class="music-controls">
-          <button class="btn" id="playBtn">播放</button>
-          <button class="btn" id="pauseBtn">暂停</button>
-          <div class="music-progress" id="progressBar">
-            <div class="progress-bar" id="currentProgress"></div>
-          </div>
-          <div class="volume-control">
-            <span>🔊</span>
-            <input type="range" min="0" max="1" step="0.1" value="0.7" class="volume-slider" id="volumeSlider">
+        <div class="hero-scroll reveal" aria-hidden="true">
+          <span>往下看看</span>
+          <div class="hero-scroll-mouse">
+            <div class="hero-scroll-wheel"></div>
           </div>
         </div>
-        <audio id="audioPlayer" src="" preload="metadata"></audio>
       </div>
     </section>
 
-    <!-- 随手记模块 -->
-    <section class="module notes">
-      <h2 class="section-title">随手记</h2>
-      <div class="card">
-        <div class="note-form">
-          <input type="text" class="input" id="noteInput" placeholder="写下你的小心情、小感悟～">
-          <button class="btn" id="addNoteBtn">添加笔记</button>
+    <section class="about section" id="about">
+      <div class="container">
+        <h2 class="section-title reveal">关于我</h2>
+        <div class="about-grid glass-panel reveal-stagger">
+          <div class="about-text reveal">
+            <p>嗨，我是文静。名字听起来安安静静，但我脑子里可热闹了。</p>
+            <p>目前在读软件工程大二，写代码是日常，但生活远不止这些。我喜欢戴上耳机循环周杰伦的老歌，也喜欢窝在角落翻哈利·波特——霍格沃茨永远是我的精神故乡。</p>
+            <p>手账是我记录生活的方式，贴纸、胶带、随手写两笔，把日子过得有模有样。也爱跳舞，跳得不好但跳得很开心。看剧是日常充电，胡思乱想是隐藏技能。</p>
+            <p>不定义自己，不给人生打标签。这里是我的一小片自留地，谢谢你来逛。</p>
+          </div>
+          <div class="about-visual reveal" aria-hidden="true">
+            <div class="about-illustration">
+              <span class="about-emoji">🌸</span>
+            </div>
+          </div>
         </div>
-        <div class="note-list" id="noteList"></div>
       </div>
     </section>
 
-    <!-- 留言板模块 -->
-    <section class="module message-board">
-      <h2 class="section-title">留言板</h2>
-      <div class="card">
-        <div class="message-form">
-          <input type="text" class="input" id="messageName" placeholder="你的昵称">
-          <textarea class="input" id="messageContent" rows="3" placeholder="留下你的悄悄话吧～"></textarea>
-          <button class="btn" id="addMessageBtn">发送留言</button>
+    <section class="interests section" id="interests">
+      <div class="container">
+        <h2 class="section-title reveal">喜欢的事</h2>
+        <div class="interests-grid reveal-stagger">
+          <article class="interest-card glass-panel reveal">
+            <span class="interest-icon" aria-hidden="true">🎵</span>
+            <h3>听歌</h3>
+            <p>周杰伦是青春背景音。晴天、七里香、夜曲……每首都能跟着哼。</p>
+          </article>
+          <article class="interest-card glass-panel reveal">
+            <span class="interest-icon" aria-hidden="true">⚡</span>
+            <h3>哈利·波特</h3>
+            <p>狮院女孩。每年冬天都要重刷一遍电影，九又四分之三站台是永远的向往。</p>
+          </article>
+          <article class="interest-card glass-panel reveal">
+            <span class="interest-icon" aria-hidden="true">📒</span>
+            <h3>手账</h3>
+            <p>胶带、贴纸、水彩笔。把日常碎片拼贴成册，翻回去看时觉得日子真可爱。</p>
+          </article>
+          <article class="interest-card glass-panel reveal">
+            <span class="interest-icon" aria-hidden="true">💃</span>
+            <h3>跳舞</h3>
+            <p>主打一个开心。在镜子前瞎跳，觉得那一刻自己是自由的。</p>
+          </article>
+          <article class="interest-card glass-panel reveal">
+            <span class="interest-icon" aria-hidden="true">📺</span>
+            <h3>看剧</h3>
+            <p>各种类型都看，是认真追剧人。最近在补老剧，欢迎推荐。</p>
+          </article>
+          <article class="interest-card glass-panel reveal">
+            <span class="interest-icon" aria-hidden="true">☁️</span>
+            <h3>胡思乱想</h3>
+            <p>发呆时脑内小剧场不停歇。有些想法写进了随手记，有些飞走了。</p>
+          </article>
         </div>
-        <div class="message-list" id="messageList"></div>
+      </div>
+    </section>
+
+    <section class="music section" id="music">
+      <div class="container">
+        <h2 class="section-title reveal">正在播放</h2>
+        <div class="music-card glass-panel reveal">
+          <div class="music-visual" aria-hidden="true">
+            <div class="vinyl">
+              <div class="vinyl-disc"></div>
+              <div class="vinyl-hole"></div>
+            </div>
+            <div class="tonearm"></div>
+            <div class="visualizer">
+              <span class="visualizer-bar"></span><span class="visualizer-bar"></span>
+              <span class="visualizer-bar"></span><span class="visualizer-bar"></span>
+              <span class="visualizer-bar"></span><span class="visualizer-bar"></span>
+              <span class="visualizer-bar"></span><span class="visualizer-bar"></span>
+            </div>
+          </div>
+          <div class="music-info">
+            <h3>🎧 最近单曲循环</h3>
+            <ul class="music-list" id="musicList">
+              <li data-song-id="186016" class="active">
+                <span class="song-num">01</span><span class="song-name">晴天</span><span class="song-artist">周杰伦</span><span class="song-play-icon">▶</span>
+              </li>
+              <li data-song-id="186001">
+                <span class="song-num">02</span><span class="song-name">七里香</span><span class="song-artist">周杰伦</span><span class="song-play-icon">▶</span>
+              </li>
+              <li data-song-id="185904">
+                <span class="song-num">03</span><span class="song-name">夜曲</span><span class="song-artist">周杰伦</span><span class="song-play-icon">▶</span>
+              </li>
+              <li data-song-id="185633">
+                <span class="song-num">04</span><span class="song-name">稻香</span><span class="song-artist">周杰伦</span><span class="song-play-icon">▶</span>
+              </li>
+              <li data-song-id="185632">
+                <span class="song-num">05</span><span class="song-name">一路向北</span><span class="song-artist">周杰伦</span><span class="song-play-icon">▶</span>
+              </li>
+            </ul>
+            <div class="music-player-wrap" id="musicPlayerWrap">
+              <iframe class="music-player-frame" id="musicPlayer" frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="86" src="//music.163.com/outchain/player?type=2&id=186016&auto=0&height=66" allow="autoplay"></iframe>
+            </div>
+            <p class="music-note">"从前从前，有个人爱你很久"——这是我的青春。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery section" id="gallery">
+      <div class="container">
+        <h2 class="section-title reveal">生活碎片</h2>
+        <div class="gallery-grid reveal-stagger">
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop" alt="治愈系海边日落" loading="lazy" data-full="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&auto=format&fit=crop">
+            <figcaption>📸 治愈系日落</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&auto=format&fit=crop" alt="敲代码的日常" loading="lazy" data-full="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1600&auto=format&fit=crop">
+            <figcaption>💻 也是个码农</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1618666012174-83b441c0bc76?w=800&auto=format&fit=crop" alt="手账与贴纸碎片" loading="lazy" data-full="https://images.unsplash.com/photo-1618666012174-83b441c0bc76?w=1600&auto=format&fit=crop">
+            <figcaption>📒 胶带与碎片</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=800&auto=format&fit=crop" alt="复古黑胶唱片机" loading="lazy" data-full="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=1600&auto=format&fit=crop">
+            <figcaption>🎧 属于周杰伦的青春</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1618944847023-38aa001235f0?w=800&auto=format&fit=crop" alt="哈利波特复古魔法氛围" loading="lazy" data-full="https://images.unsplash.com/photo-1618944847023-38aa001235f0?w=1600&auto=format&fit=crop">
+            <figcaption>⚡ 霍格沃茨在逃学生</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1508215885820-4585e56135c8?w=800&auto=format&fit=crop" alt="唯美晚霞天空" loading="lazy" data-full="https://images.unsplash.com/photo-1508215885820-4585e56135c8?w=1600&auto=format&fit=crop">
+            <figcaption>☁️ 脑内小剧场</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="lifephoto/1.jpg" alt="尹文静的生活照 1" loading="lazy" decoding="async" data-full="lifephoto/1.jpg">
+            <figcaption>📸 某一天</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="lifephoto/2.jpg" alt="尹文静的生活照 2" loading="lazy" decoding="async" data-full="lifephoto/2.jpg">
+            <figcaption>📸 某一天</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="lifephoto/3.jpg" alt="尹文静的生活照 3" loading="lazy" decoding="async" data-full="lifephoto/3.jpg">
+            <figcaption>📸 某一天</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="lifephoto/4.jpg" alt="尹文静的生活照 4" loading="lazy" decoding="async" data-full="lifephoto/4.jpg">
+            <figcaption>📸 某一天</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="lifephoto/5.jpg" alt="尹文静的生活照 5" loading="lazy" decoding="async" data-full="lifephoto/5.jpg">
+            <figcaption>📸 某一天</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="lifephoto/6.jpg" alt="尹文静的生活照 6" loading="lazy" decoding="async" data-full="lifephoto/6.jpg">
+            <figcaption>📸 某一天</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-label="图片预览" aria-hidden="true">
+      <button class="lightbox-close" aria-label="关闭预览">&times;</button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    </div>
+
+    <section class="journal section" id="journal">
+      <div class="container">
+        <h2 class="section-title reveal">随手记</h2>
+        <p class="section-desc reveal">想到什么写什么，这里没有人打分。</p>
+        <div class="journal-editor glass-panel reveal">
+          <textarea id="journalInput" class="journal-textarea" rows="4" placeholder="今天想到了什么……" aria-label="写一条随手记"></textarea>
+          <div class="journal-actions">
+            <span class="journal-hint" id="journalHint">写下来，就不会忘啦</span>
+            <button class="btn btn-primary" id="journalSave" aria-label="保存随手记">
+              <span>保存</span>
+            </button>
+          </div>
+        </div>
+        <div class="journal-list" id="journalList" aria-label="随手记列表"></div>
+      </div>
+    </section>
+
+    <section class="certificates section" id="certificates">
+      <div class="container">
+        <details class="cert-details glass-panel reveal">
+          <summary class="cert-summary">
+            <span>📜 一些记录</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" class="cert-arrow">
+              <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="cert-content">
+            <ul class="cert-list">
+              <li class="cert-item">
+                <a href="huojiang/2024-2025三好学生标兵.jpg" target="_blank" rel="noopener" class="cert-link">
+                  <span class="cert-icon" aria-hidden="true">🏅</span>
+                  <span>2024-2025 三好学生标兵</span>
+                </a>
+              </li>
+              <li class="cert-item">
+                <a href="zhiyuanfuwu/1.jpg" target="_blank" rel="noopener" class="cert-link">
+                  <span class="cert-icon" aria-hidden="true">🤝</span>
+                  <span>志愿服务证书 ①</span>
+                </a>
+              </li>
+              <li class="cert-item">
+                <a href="zhiyuanfuwu/2.jpg" target="_blank" rel="noopener" class="cert-link">
+                  <span class="cert-icon" aria-hidden="true">🤝</span>
+                  <span>志愿服务证书 ②</span>
+                </a>
+              </li>
+              <li class="cert-item">
+                <a href="zhiyuanfuwu/3.jpg" target="_blank" rel="noopener" class="cert-link">
+                  <span class="cert-icon" aria-hidden="true">🤝</span>
+                  <span>志愿服务证书 ③</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="guestbook section" id="guestbook">
+      <div class="container">
+        <h2 class="section-title reveal">
+          <span>📖 访客留言板</span>
+        </h2>
+        <p class="section-desc reveal">留下你的足迹，让这里热闹起来吧 ✨</p>
+        
+        <div class="guestbook-form glass-panel reveal">
+          <div class="form-group">
+            <div class="name-field-wrapper">
+              <span class="name-emoji-preview" id="nameEmojiPreview">🌸</span>
+              <input type="text" id="guestName" class="guestbook-input" placeholder="你的名字" maxlength="20">
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea id="guestMessage" class="guestbook-textarea" rows="3" placeholder="想说的话……" maxlength="200"></textarea>
+          </div>
+          <div class="form-actions">
+            <span class="char-counter" id="charCounter">0 / 200</span>
+            <button id="submitGuestbook" class="btn btn-primary guestbook-submit">
+              <span>💬 留下印记</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="guestbook-stats reveal">
+          <span class="stats-count" id="guestbookCount">0</span>
+          <span class="stats-label">条暖心留言</span>
+        </div>
+        <div class="guestbook-grid" id="guestbookGrid">
+          </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 我的温暖小站 | 粉紫治愈系 ✨</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-text">尹文静 · 个人小站</p>
+      <p class="footer-quote" id="footerQuote">"即使在最黑暗的时刻，也能找到幸福，只要你记得点亮灯光。" —— 阿不思·邓布利多</p>
+      <p class="footer-copy">&copy; 2026 尹文静</p>
+    </div>
   </footer>
 
-  <script>
-    // ========== 工具函数封装 ==========
-    // localStorage操作
-    const storage = {
-      get: (key) => {
-        const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : [];
-      },
-      set: (key, data) => {
-        localStorage.setItem(key, JSON.stringify(data));
-      },
-      remove: (key, index) => {
-        const data = storage.get(key);
-        data.splice(index, 1);
-        storage.set(key, data);
-        return data;
-      }
-    };
+  <audio id="bgMusic" loop preload="none">
+    <source src="music/pugongying.ogg" type="audio/ogg">
+  </audio>
 
-    // 防抖函数
-    const debounce = (fn, delay = 500) => {
-      let timer = null;
-      return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => fn.apply(this, args), delay);
-      };
-    };
+  <button id="globalMusicBtn" class="floating-music-btn" aria-label="控制背景音乐" title="点击 播放/暂停 背景音乐">
+    <span class="music-note-icon">🎵</span>
+  </button>
 
-    // ========== 主题切换 ==========
-    const themeToggle = document.getElementById('themeToggle');
-    const initTheme = () => {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      themeToggle.innerText = savedTheme === 'light' ? '🌙' : '☀️';
-    };
-
-    const toggleTheme = () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      themeToggle.innerText = newTheme === 'light' ? '🌙' : '☀️';
-    };
-
-    themeToggle.addEventListener('click', toggleTheme);
-
-    // ========== 音乐播放器 ==========
-    class MusicPlayer {
-      constructor() {
-        this.audio = document.getElementById('audioPlayer');
-        this.musicList = document.getElementById('musicList');
-        this.playBtn = document.getElementById('playBtn');
-        this.pauseBtn = document.getElementById('pauseBtn');
-        this.progressBar = document.getElementById('progressBar');
-        this.currentProgress = document.getElementById('currentProgress');
-        this.volumeSlider = document.getElementById('volumeSlider');
-        this.musics = [
-          { id: 1, src: 'https://music.163.com/song/media/outer/url?id=1879461642.mp3' }, // 示例音乐链接（可替换）
-          { id: 2, src: 'https://music.163.com/song/media/outer/url?id=1880327100.mp3' },
-          { id: 3, src: 'https://music.163.com/song/media/outer/url?id=1879461643.mp3' }
-        ];
-        this.currentMusicId = storage.get('currentMusicId')[0] || 1;
-        this.currentTime = storage.get('currentMusicTime')[0] || 0;
-        this.volume = storage.get('musicVolume')[0] || 0.7;
-        this.init();
-      }
-
-      init() {
-        // 初始化音量
-        this.audio.volume = this.volume;
-        this.volumeSlider.value = this.volume;
-        // 初始化当前播放音乐
-        this.setMusic(this.currentMusicId);
-        // 恢复播放进度
-        this.audio.currentTime = this.currentTime;
-        // 绑定事件
-        this.bindEvents();
-      }
-
-      bindEvents() {
-        // 选择音乐
-        this.musicList.addEventListener('click', (e) => {
-          if (e.target.classList.contains('music-item')) {
-            const id = Number(e.target.dataset.id);
-            this.setMusic(id);
-            this.play();
-          }
-        });
-
-        // 播放/暂停
-        this.playBtn.addEventListener('click', () => this.play());
-        this.pauseBtn.addEventListener('click', () => this.pause());
-
-        // 进度条更新
-        this.audio.addEventListener('timeupdate', () => this.updateProgress());
-
-        // 进度条点击跳转
-        this.progressBar.addEventListener('click', (e) => {
-          const progressWidth = this.progressBar.offsetWidth;
-          const clickX = e.offsetX;
-          const duration = this.audio.duration;
-          this.audio.currentTime = (clickX / progressWidth) * duration;
-        });
-
-        // 音量控制
-        this.volumeSlider.addEventListener('input', (e) => {
-          this.volume = e.target.value;
-          this.audio.volume = this.volume;
-          storage.set('musicVolume', [this.volume]);
-        });
-
-        // 保存播放进度
-        this.audio.addEventListener('pause', () => {
-          storage.set('currentMusicTime', [this.audio.currentTime]);
-        });
-
-        // 音乐结束自动切歌
-        this.audio.addEventListener('ended', () => {
-          let nextId = this.currentMusicId + 1;
-          if (nextId > this.musics.length) nextId = 1;
-          this.setMusic(nextId);
-          this.play();
-        });
-      }
-
-      setMusic(id) {
-        // 移除之前的active状态
-        document.querySelectorAll('.music-item').forEach(item => {
-          item.classList.remove('active');
-        });
-        // 设置新音乐
-        const music = this.musics.find(m => m.id === id);
-        if (music) {
-          this.audio.src = music.src;
-          this.currentMusicId = id;
-          storage.set('currentMusicId', [id]);
-          // 添加active状态
-          document.querySelector(`.music-item[data-id="${id}"]`).classList.add('active');
-        }
-      }
-
-      play() {
-        this.audio.play();
-        this.playBtn.innerText = '播放中';
-      }
-
-      pause() {
-        this.audio.pause();
-        this.playBtn.innerText = '播放';
-      }
-
-      updateProgress() {
-        const progress = (this.audio.currentTime / this.audio.duration) * 100;
-        this.currentProgress.style.width = `${progress}%`;
-      }
-    }
-
-    // ========== 随手记功能 ==========
-    const initNotes = () => {
-      const noteInput = document.getElementById('noteInput');
-      const addNoteBtn = document.getElementById('addNoteBtn');
-      const noteList = document.getElementById('noteList');
-      const notes = storage.get('notes');
-
-      // 渲染笔记
-      const renderNotes = () => {
-        noteList.innerHTML = '';
-        const notes = storage.get('notes');
-        notes.forEach((note, index) => {
-          const noteItem = document.createElement('div');
-          noteItem.className = 'note-item';
-          noteItem.innerHTML = `
-            <span>${note}</span>
-            <span class="note-delete" data-index="${index}">🗑️</span>
-          `;
-          noteList.appendChild(noteItem);
-        });
-      };
-
-      // 添加笔记
-      const addNote = debounce(() => {
-        const content = noteInput.value.trim();
-        if (!content) {
-          alert('笔记内容不能为空哦～');
-          return;
-        }
-        const notes = storage.get('notes');
-        notes.push(content);
-        storage.set('notes', notes);
-        noteInput.value = '';
-        renderNotes();
-      });
-
-      // 删除笔记
-      noteList.addEventListener('click', (e) => {
-        if (e.target.classList.contains('note-delete')) {
-          const index = Number(e.target.dataset.index);
-          storage.remove('notes', index);
-          renderNotes();
-        }
-      });
-
-      addNoteBtn.addEventListener('click', addNote);
-      renderNotes();
-    };
-
-    // ========== 留言板功能 ==========
-    const initMessages = () => {
-      const messageName = document.getElementById('messageName');
-      const messageContent = document.getElementById('messageContent');
-      const addMessageBtn = document.getElementById('addMessageBtn');
-      const messageList = document.getElementById('messageList');
-      const messages = storage.get('messages');
-
-      // 渲染留言
-      const renderMessages = () => {
-        messageList.innerHTML = '';
-        const messages = storage.get('messages');
-        messages.forEach((msg, index) => {
-          const messageItem = document.createElement('div');
-          messageItem.className = 'message-item';
-          messageItem.innerHTML = `
-            <div class="message-meta">
-              <span>${msg.name}</span>
-              <span>${msg.time}</span>
-              <span class="message-delete" data-index="${index}">🗑️</span>
-            </div>
-            <p>${msg.content}</p>
-          `;
-          messageList.appendChild(messageItem);
-        });
-      };
-
-      // 添加留言
-      const addMessage = debounce(() => {
-        const name = messageName.value.trim();
-        const content = messageContent.value.trim();
-        if (!name || !content) {
-          alert('昵称和留言内容都不能为空哦～');
-          return;
-        }
-        const now = new Date();
-        const time = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-        const messages = storage.get('messages');
-        messages.push({ name, content, time });
-        storage.set('messages', messages);
-        messageName.value = '';
-        messageContent.value = '';
-        renderMessages();
-      });
-
-      // 删除留言
-      messageList.addEventListener('click', (e) => {
-        if (e.target.classList.contains('message-delete')) {
-          const index = Number(e.target.dataset.index);
-          storage.remove('messages', index);
-          renderMessages();
-        }
-      });
-
-      addMessageBtn.addEventListener('click', addMessage);
-      renderMessages();
-    };
-
-    // ========== 页面初始化 ==========
-    window.addEventListener('DOMContentLoaded', () => {
-      initTheme(); // 初始化主题
-      new MusicPlayer(); // 初始化音乐播放器
-      initNotes(); // 初始化随手记
-      initMessages(); // 初始化留言板
-    });
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
